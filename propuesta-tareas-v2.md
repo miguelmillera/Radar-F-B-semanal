@@ -131,9 +131,10 @@ Coste mensual estimado: unos 18 $ (≈ 8 $ las dos tareas de correo en 22 días 
 
 **Hallazgo**: quitar conectores bajó el arranque solo ~10 % (de 75.324 a 67.936). Los ~68.000 tokens restantes no parecen venir de los conectores. Hipótesis sin comprobar: memoria de Claude activada en las tareas y la lista de skills de la cuenta. Una tarea mínima sin conectores en otro entorno arrancó con 32.335.
 
-**Productividad (Task Harmony)**: disparador corregido (`UPDATE OF status, status_key`), vista `productividad_diaria`, 157 puntos recuperados en el 2-oct (31 cierres, 25 arranques). Pendiente de comprobar con un cambio real de estado desde la app.
+**Productividad (Task Harmony)**: disparador corregido (`UPDATE OF status, status_key`), vista `productividad_diaria`, 157 puntos recuperados en el 2-oct (31 cierres, 25 arranques). Comprobado por Miguel con un cambio real de estado: suma puntos (1 punto hoy). El gráfico de 14 días no dibujaba las barras (alturas en % sobre un padre sin altura); corregido por el agente de Lovable en el commit `d224a56f` (alturas en px sobre una altura fija) y confirmado por Miguel.
 
 **Pendientes**
 - Lunes 5-oct: revisar las primeras ejecuciones reales (coste, caché de la segunda tarea, calidad de los seguimientos creados).
 - Los 12 seguimientos de la prueba del 3-oct (versión anterior) no se importaron: al menos 2 eran falsos positivos.
-- Opcional: desconectar Google Drive; valorar la memoria y las skills como causa del arranque de ~68.000 tokens.
+- Google Drive: desconectado por Miguel.
+- Opcional: valorar la memoria y las skills como causa del arranque de ~68.000 tokens.
