@@ -79,3 +79,13 @@ Nota: el prompt aplicado en la tarea incluye la regla del lunes y topes mayores 
 
 - Una tarea creada con la herramienta de Claude Code **nace sin ningún conector** y corre en otro entorno, así que no puede leer Outlook ni escribir en Lovable. Una tarea nueva con conectores solo se puede crear desde claude.ai (Routines) o desde un chat de Cowork.
 - Las tareas existentes se pueden retocar (prompt, modelo, horario) con la herramienta, pero no sus conectores.
+
+## Versión 3 del prompt de Seguimientos (3-oct, aplicada)
+
+Cambios respecto a la versión anterior:
+- Lista cerrada de herramientas: solo `outlook_email_search` y `query_database`; no abre cuerpos de correo ni usa otras herramientas.
+- Listado con `folderName "Sent Items"` y `afterDateTime`/`beforeDateTime` exactos (ya no descarta a mano los correos fuera de ventana).
+- Comprobación de respuesta más estricta: busca por asunto **y** por remitente (el destinatario original); un correo de la misma persona sobre otro asunto no cuenta como respuesta. Motivo: en la prueba del 3-oct la versión anterior citó como respuesta un correo de Inma sobre otro tema.
+- Si no hay seguimientos, no hace ninguna consulta a la base de datos (0 en vez de 1).
+- Los candidatos con duda sobre si son una petición se descartan; los que tienen duda sobre si contestaron se crean.
+- Sigue con Haiku 4.5, de lunes a viernes a las 07:05 (Madrid).
