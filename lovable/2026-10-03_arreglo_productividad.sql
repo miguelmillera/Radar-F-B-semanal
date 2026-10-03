@@ -22,7 +22,7 @@ BEGIN
   FOR r IN
     SELECT conname FROM pg_constraint
     WHERE conrelid = 'public.task_events'::regclass AND contype = 'f'
-      AND confrelid = 'public.tasks'::regclass AND confdeltype = 'c'
+      AND confrelid = 'public.tasks'::regclass AND confdeltype <> 'n'
   LOOP
     EXECUTE format('ALTER TABLE public.task_events DROP CONSTRAINT %I', r.conname);
     ALTER TABLE public.task_events ALTER COLUMN task_id DROP NOT NULL;
