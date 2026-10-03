@@ -89,3 +89,20 @@ Cambios respecto a la versión anterior:
 - Si no hay seguimientos, no hace ninguna consulta a la base de datos (0 en vez de 1).
 - Los candidatos con duda sobre si son una petición se descartan; los que tienen duda sobre si contestaron se crean.
 - Sigue con Haiku 4.5, de lunes a viernes a las 07:05 (Madrid).
+
+## Sincronizar Outlook, versión 2 (3-oct, aplicada)
+
+- Una sola llamada a Outlook en lugar de hasta 4 páginas: `query "isflagged:true"` con `afterDateTime` = hace 45 días. Comprobado: devuelve los 11 correos con bandera de la ventana en una página (antes recorría 75 correos hasta llegar a abril de 2025).
+- Consulta de «ya importados» limitada a los últimos 50 días (antes traía todos los registros históricos, y crecía cada día).
+- Si no hay correos nuevos, no hace el INSERT.
+- Herramientas acotadas y topes: 3 llamadas a Outlook, 2 a la base de datos, 5 lecturas de cuerpo.
+
+## Cómo quitar los conectores de una tarea (según la documentación oficial de rutinas)
+
+1. Entra en https://claude.ai/code/routines.
+2. Haz clic en la tarea para abrir su página de detalle.
+3. Abre el menú junto al nombre de la tarea y elige **Edit**.
+4. Baja hasta el final del formulario, a **Connectors**.
+5. Quita todos los conectores salvo los necesarios: Outlook y Seguimientos solo **Microsoft 365** y **Lovable**; el Radar solo **Gmail**.
+6. Guarda los cambios.
+7. Comprueba en la página de detalle que la lista de conectores quedó con 2 (o 1). Una ejecución posterior debe arrancar con unos 35.000–45.000 tokens en vez de 72.000.
