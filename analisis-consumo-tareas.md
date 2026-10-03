@@ -1,5 +1,8 @@
 # Consumo de tokens en las tareas programadas: análisis y optimización
 
+> **Nota (3-oct, tarde):** este documento es el análisis de partida. La configuración final y las mediciones posteriores están en `propuesta-tareas-v2.md`. En particular: las tareas de correo corren solo de lunes a viernes, Seguimientos revisa una ventana de 24 h (72 h el lunes) y usa Haiku 4.5, y la limpieza de conectores se hizo en la cuenta, no en cada tarea.
+
+
 Fecha del análisis: sábado 3 de octubre de 2026. Fuente: `list_triggers`, `get_session` y los eventos de cada ejecución. Los costes son el `total_cost_usd` que registra cada sesión, a precio de lista.
 
 ## 1. Qué se ha gastado hoy

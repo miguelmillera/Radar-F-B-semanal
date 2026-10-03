@@ -106,3 +106,34 @@ Cambios respecto a la versión anterior:
 5. Quita todos los conectores salvo los necesarios: Outlook y Seguimientos solo **Microsoft 365** y **Lovable**; el Radar solo **Gmail**.
 6. Guarda los cambios.
 7. Comprueba en la página de detalle que la lista de conectores quedó con 2 (o 1). Una ejecución posterior debe arrancar con unos 35.000–45.000 tokens en vez de 72.000.
+
+## Estado final a 3 de octubre de 2026
+
+**Tareas activas (3)**
+
+| Tarea | Modelo | Horario (Madrid) |
+|---|---|---|
+| Sincronizar tareas desde Outlook | Haiku 4.5 | L-V 06:52 |
+| Seguimientos: correos enviados sin respuesta | Haiku 4.5 | L-V 07:05 |
+| Radar F&B semanal | Sonnet 5 | sábados 02:00 (cambiado por Miguel) |
+
+**Mediciones**
+
+| | Antes (3-oct) | Después (pruebas) |
+|---|---|---|
+| Sincronizar Outlook | 2,90 $ (Opus 5, 2 min) | **0,11 $** (Haiku, 43 s, 1 página de Outlook) |
+| Seguimientos | 18,59 $ (Sonnet 5, 77 min, fallida) | **0,25 $** (Haiku, 1 min 49 s) |
+| Arranque fijo de cada ejecución (Haiku) | 75.324 tokens | 67.936 tokens tras desconectar conectores de la cuenta |
+
+Coste mensual estimado: unos 18 $ (≈ 8 $ las dos tareas de correo en 22 días laborables + ≈ 10 $ el Radar), frente a más de 600 $ antes.
+
+**Conectores de la cuenta**: Gmail, Google Drive, GitHub, Lovable y Microsoft 365. Desconectados: Canva, Clay, Firecrawl, Gamma, Google Calendar, Higgsfield, Read AI. Cada tarea conserva en la API su lista antigua de 11 conectores (no se puede cambiar desde la pantalla «Tareas programadas», cuya «Configuración avanzada» solo tiene los avisos).
+
+**Hallazgo**: quitar conectores bajó el arranque solo ~10 % (de 75.324 a 67.936). Los ~68.000 tokens restantes no parecen venir de los conectores. Hipótesis sin comprobar: memoria de Claude activada en las tareas y la lista de skills de la cuenta. Una tarea mínima sin conectores en otro entorno arrancó con 32.335.
+
+**Productividad (Task Harmony)**: disparador corregido (`UPDATE OF status, status_key`), vista `productividad_diaria`, 157 puntos recuperados en el 2-oct (31 cierres, 25 arranques). Pendiente de comprobar con un cambio real de estado desde la app.
+
+**Pendientes**
+- Lunes 5-oct: revisar las primeras ejecuciones reales (coste, caché de la segunda tarea, calidad de los seguimientos creados).
+- Los 12 seguimientos de la prueba del 3-oct (versión anterior) no se importaron: al menos 2 eran falsos positivos.
+- Opcional: desconectar Google Drive; valorar la memoria y las skills como causa del arranque de ~68.000 tokens.
