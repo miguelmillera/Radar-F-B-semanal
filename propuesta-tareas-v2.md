@@ -27,7 +27,7 @@ La versión del 3-oct ya usaba una ventana de hace 6 a hace 3 días, pero eso so
 ## Diseño propuesto (Seguimientos)
 
 - **Una sola tarea, un solo trabajo.** Partirla en varias no ahorra nada: cada tarea paga su arranque fijo.
-- **Ventana de 24 horas exactas:** los correos enviados entre hace 96 y hace 72 horas. Ejecutada los 7 días de la semana, cada correo se revisa exactamente una vez, sin huecos ni solapes.
+- **Ventana de 24 horas, solo de lunes a viernes:** de martes a viernes, los correos enviados entre hace 96 y hace 72 horas; el lunes, entre hace 144 y hace 72 horas (de martes a viernes de la semana anterior). Así cada correo se revisa exactamente una vez, sin huecos ni solapes, aunque no corra en fin de semana. El lunes cuesta unas 3 veces más (más páginas de listado).
 - **≈ 34 correos al día en vez de 137:** 2 páginas de listado en vez de 6.
 - **Una consulta a la base de datos.** Las claves (`pendiente`, `seguimiento`, `alta`) están fijas. Un único INSERT con `ON CONFLICT DO NOTHING`. El límite de acciones gratuitas de Lovable no vuelve a ser un problema.
 - **Topes duros:** 12 llamadas a Outlook, 15 comprobaciones de respuesta, 2 consultas a la base de datos.
@@ -71,7 +71,9 @@ Solo si el INSERT falla por una clave foránea, haz UNA consulta a task_types/ta
 PASO 5 — Resumen breve en español: correos enviados revisados, seguimientos creados (persona · asunto · días sin respuesta, uno por línea), y una frase con los dudosos descartados. Si no hay ninguno, dilo en una frase. Esta tarea solo lee correo: nunca envía, responde ni modifica nada en el buzón.
 ```
 
-Horario sugerido: todos los días, 07:52 hora de Madrid (`CRON_TZ=Europe/Madrid 52 7 * * *`).
+Horario aplicado: de lunes a viernes, 07:52 hora de Madrid (`CRON_TZ=Europe/Madrid 52 7 * * 1-5`). Sincronizar Outlook: lunes a viernes, 06:52 (`CRON_TZ=Europe/Madrid 52 6 * * 1-5`).
+
+Nota: el prompt aplicado en la tarea incluye la regla del lunes y topes mayores ese día (20 llamadas a Outlook, 5 páginas, 25 candidatos). El texto del bloque anterior es la versión previa de 24 h diarias.
 
 ## Qué no se puede hacer desde Claude Code
 
