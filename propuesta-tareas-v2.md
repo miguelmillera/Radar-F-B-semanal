@@ -138,3 +138,14 @@ Coste mensual estimado: unos 18 $ (≈ 8 $ las dos tareas de correo en 22 días 
 - Los 12 seguimientos de la prueba del 3-oct (versión anterior) no se importaron: al menos 2 eran falsos positivos.
 - Google Drive: desconectado por Miguel.
 - Opcional: valorar la memoria y las skills como causa del arranque de ~68.000 tokens.
+
+## Seguimientos, versión 4 del prompt (5-oct, aplicada)
+
+Motivo: en la primera ejecución real (lunes 5-oct) se crearon 9 tareas; al contrastar dos con el buzón eran peticiones reales sin respuesta, pero las 9 tenían la misma fecha de origen (1-oct) y una era del 2-oct; además algunos títulos no decían quién debía actuar.
+
+Cambios:
+- `origin_date` = fecha de envío de cada correo (hora de Madrid), nunca una fecha común; `N días sin respuesta` calculado con ella.
+- Título siempre «Reclamar a <nombre>: <asunto en pocas palabras>».
+- Se refuerza el límite superior de la ventana: lo enviado hace menos de 72 h no entra.
+
+Mediciones del primer día real (lunes 5-oct): Sincronizar Outlook 0,14 $ / 62 s / arranque 66.178 tokens; Seguimientos 0,38 $ / 3 min 24 s / arranque 66.988 tokens (50 correos revisados, 9 creados, 5 descartados por tener respuesta). El arranque no ha bajado tras desconectar conectores; el truco de lanzarlas seguidas no se pudo confirmar.
